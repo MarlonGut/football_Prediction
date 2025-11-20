@@ -22,13 +22,29 @@ print(df.head())
 print(df.shape)
 
 #namen von spalten
-print(df.columns)
-print(df.info())
-print(df.isnull().sum())
-print(df.describe())
-print(df.nunique())
 print(df.dtypes)
+print(df.describe())
 
-# drop the columns that are not needed for analysis
-cols_to_drop = [ col for col in df.columns if df[col].nunique() == 1 ]
-print(cols_to_drop)
+#check for msiisng values
+print(df.isnull().sum())
+
+
+#null Werte aus embarked spalte entfernen
+df = df[df['Embarked'] != 0]
+print(df['Embarked'])
+
+#schauen ob die zero zeilen nur null enthalten
+print((df['zero'] == 0).all())
+
+for column in df.columns:
+    if (df[column] == 0).all():
+        print(f"Column {column } contains only zero values.")
+    else:
+        print(f"Column {column} contains non-zero values.")
+
+#spalten mit nur null werten entfernen
+zero_only_columns = (df == 0).all()
+
+
+
+    
